@@ -64,7 +64,7 @@ nav ul li a{
 }
 
 .back-video{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -72,5 +72,22 @@ nav ul li a{
   object-fit: cover;
   z-index: -1;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+section {
+  width: 100vw;
+  height: 100vh; 
+  scroll-snap-align: start;
+}
+
 
 
