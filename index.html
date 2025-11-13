@@ -5,21 +5,25 @@
   <title>Pirates Sushi Page</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+  <div class="control-menu" id="controlMenu">
+    <h2>Menu</h2>
+    <img src="LobsterP.png" class="Image1">
+  </div>
+
+  <nav>
+    <img src="piratas_logo1.png" class="logo">   
+    <button id="menuToggle" class="toggle-btn">MENU</button>
+    <button id="homeButton" class="toggle-btn-home-btn" type="button">HOME</button>
+  </nav>
+
+
   <section id="home" class="hero">
     <video autoplay loop muted playsinline preload="auto" class="back-video">
       <source src="LogoVideo.mp4" type="video/mp4">
     </video>
-    
-    <nav>
-      <img src="piratas_logo1.png" class="logo">
-      <ul>
-        <li><a href="#home">HOME</a></li>
-        <li><a href="#menu">MENU</a></li>
-        <li><a href="#about">ABOUT US</a></li>
-        <li><a href="#contact">CONTACT US</a></li>
-      </ul>
-    </nav>
+
     <div class="content">
       <h1>San Jose, CA</h1>
       <a href="#menu">Explore</a>
@@ -37,7 +41,31 @@
     <p>+1(408) 561-5136</p>
   </section>
 
+
+  <script>
+    const menu = document.getElementById("controlMenu");
+    const toggleBtn = document.getElementById("menuToggle");
+    const homeButton = document.getElementById("homeButton");
+
+    let isOpen = false;
+
+    toggleBtn.addEventListener("click", () => {
+      if (isOpen) {
+        menu.style.top = `-${menu.offsetHeight}px`;  // hide
+      } else {
+        menu.style.top = "0px";     // show
+      }
+      isOpen = !isOpen;
+    });
+
+
+    homeButton.addEventListener("click", () => {
+      document.getElementById("home").scrollIntoView({ behavior: "smooth"});
+      menuPanel.style.top = `-${menuPanel.offsetHeight}px`;
+      menuOpen = false;
+
+    }); 
+  </script>
   
 </body>
 </html>
-
