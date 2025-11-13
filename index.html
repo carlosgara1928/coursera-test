@@ -9,13 +9,31 @@
 <body>
   <div class="control-menu" id="controlMenu">
     <h2>Menu</h2>
-    <img src="LobsterP.png" class="Image1">
+    <div class="item">
+      <img src="LobsterP.png" class="Image1">
+      <h3>Lobster Baked Roll</h3>
+      <p>$15.00</p>
+      <button onclick="addToCart('Lobster Baked Roll', 15.00)">Agregar</button>
+    </div>
+  </div>
+
+  <div class="control-about" id="controlAbout">
+    <section id="about">
+      <h2>About US</h2>
+      <p>Coming soon...</p>
+    </section>
+    <section id="contact">
+      <h2>Contact Us</h2>
+      <p>San Jose, CA</p>
+      <p>+1(408) 561-5136</p>
+    </section>
   </div>
 
   <nav>
-    <img src="piratas_logo1.png" class="logo">   
     <button id="menuToggle" class="toggle-btn" type="button">MENU</button>
     <button id="homeButton" class="toggle-btn-home" type="button">HOME</button>
+    <button id="aboutUsButton" class="toggle-about" type="button">ABOUT</button>
+    <img src="piratas_logo1.png" class="logo">   
   </nav>
 
   <section id="home" class="hero">
@@ -28,25 +46,23 @@
       <a href="#menu">Explore</a>
     </div>
   </section>
-  
-  <section id="about">
-    <h2>About US</h2>
-    <p>Coming soon...</p>
-  </section>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <p>San Jose, CA</p>
-    <p>+1(408) 561-5136</p>
-  </section>
-
+  <div id="cartPanel" class="cart-panel">
+    <h2>Tu Pedido</h2>
+    <ul id="cartList"></ul>
+    <h3>Total: $<span id="cartTotal">0</span></h3>
+    <button id="checkoutButton">Ir al Checkout</button>
+  </div>
 
   <script>
     const menuPanel = document.getElementById("controlMenu");
     const menuButton = document.getElementById("menuToggle");
     const homeButton = document.getElementById("homeButton");
+    const aboutPanel = document.getElementById("controlAbout");
+    const aboutUsButton = document.getElementById("aboutUsButton");
 
     let menuOpen = false;
+    let aboutOpen = false;
 
     // MENU button toggle
     menuButton.addEventListener("click", () => {
@@ -66,6 +82,47 @@
       menuPanel.style.top = `-${menuPanel.offsetHeight}px`;
       menuOpen = false;
     });
+
+    aboutUsButton.addEventListener("click", () => {
+      if (aboutOpen) {
+        aboutPanel.style.top = `-${menuPanel.offsetHeight}px`;//hide
+      } else {
+        aboutPanel.style.top = "0px";
+      }
+      aboutOpen = !aboutOpen;
+    });
+  </script>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price){
+      cart.push({name, price});
+      updateCart();
+    }
+  </script>
+
+  <script>
+    function updateCart() {
+      const list = document.getElementById("cartList");
+      const totalDisplay = document.getElementById("cartTotal");
+  
+      list.innerHTML = "";
+      let total = 0;
+      cart.forEach(item => {
+        list.innerHTML += `<li>${item.name} - $${item.price}</li>`;
+        total += item.price;
+      });
+
+      totalDisplay.innerText = total.toFixed(2);
+    }
+
+    document.getElementById("checkoutButton").addEventListener("click", () => {
+    // Guarda el carrito temporalmente
+      localStorage.setItem("cart", JSON.stringify(cart));
+      window.location.href = "checkout.html"; // Página nueva
+    });
+
   </script>
 
 </body>
