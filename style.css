@@ -151,7 +151,7 @@ section p{
   border-radius: 12px;
 }
 
-.toggle-btn-home-btn {
+.toggle-btn-home {
   position: fixed;
   right: 20px;
   top: 20px; /* hidden */
