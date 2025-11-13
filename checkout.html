@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<h1>Checkout</h1>
+<div id="checkoutItems"></div>
+<h2>Total: $<span id="checkoutTotal"></span></h2>
+<button>Pagar Ahora</button>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem("cart"));
+  let total = 0;
+
+  cart.forEach(item => {
+    document.getElementById("checkoutItems").innerHTML += `<p>${item.name} - $${item.price}</p>`;
+    total += item.price;
+  });
+
+  document.getElementById("checkoutTotal").innerText = total.toFixed(2);
+</script>
+</html>
