@@ -14,10 +14,9 @@
 
   <nav>
     <img src="piratas_logo1.png" class="logo">   
-    <button id="menuToggle" class="toggle-btn">MENU</button>
-    <button id="homeButton" class="toggle-btn-home-btn" type="button">HOME</button>
+    <button id="menuToggle" class="toggle-btn" type="button">MENU</button>
+    <button id="homeButton" class="toggle-btn-home" type="button">HOME</button>
   </nav>
-
 
   <section id="home" class="hero">
     <video autoplay loop muted playsinline preload="auto" class="back-video">
@@ -32,7 +31,7 @@
   
   <section id="about">
     <h2>About US</h2>
-    <P>Coming soon...</P>
+    <p>Coming soon...</p>
   </section>
 
   <section id="contact">
@@ -43,29 +42,31 @@
 
 
   <script>
-    const menu = document.getElementById("controlMenu");
-    const toggleBtn = document.getElementById("menuToggle");
+    const menuPanel = document.getElementById("controlMenu");
+    const menuButton = document.getElementById("menuToggle");
     const homeButton = document.getElementById("homeButton");
 
-    let isOpen = false;
+    let menuOpen = false;
 
-    toggleBtn.addEventListener("click", () => {
-      if (isOpen) {
-        menu.style.top = `-${menu.offsetHeight}px`;  // hide
+    // MENU button toggle
+    menuButton.addEventListener("click", () => {
+      if (menuOpen) {
+        menuPanel.style.top = `-${menuPanel.offsetHeight}px`; // hide
       } else {
-        menu.style.top = "0px";     // show
+        menuPanel.style.top = "0px"; // show
       }
-      isOpen = !isOpen;
+      menuOpen = !menuOpen;
     });
 
-
+    // HOME button scroll + close menu
     homeButton.addEventListener("click", () => {
-      document.getElementById("home").scrollIntoView({ behavior: "smooth"});
+      document.getElementById("home").scrollIntoView({ behavior: "smooth" });
+
+      // close menu if open
       menuPanel.style.top = `-${menuPanel.offsetHeight}px`;
       menuOpen = false;
-
-    }); 
+    });
   </script>
-  
+
 </body>
 </html>
