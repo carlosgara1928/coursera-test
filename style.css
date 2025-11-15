@@ -72,10 +72,11 @@ nav{
 
 /* Logo */
 nav .logo{
-  width: 80px;
-  position: fixed;
-  top: 20px;
-  z-index: 500;
+   width: 80px;
+   position: fixed;
+   top: 20px;
+   left: 100px;
+   z-index: 500;
 }
 
 /* Buttons */
