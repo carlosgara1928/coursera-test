@@ -1,3 +1,6 @@
+/* --------------------------------------------------
+   GLOBAL RESET
+-------------------------------------------------- */
 *{
   margin: 0;
   padding: 0;
@@ -5,6 +8,13 @@
   font-family: 'Poppins', sans-serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* --------------------------------------------------
+   HERO SECTION
+-------------------------------------------------- */
 .hero{
   width: 100%;
   height: 100vh;
@@ -13,17 +23,42 @@
   align-items: center;
   justify-content: center;
 }
+
 .back-video{
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 50%;
   object-fit: cover;
   z-index: -1;
   pointer-events: none;
 }
 
+.content{
+  text-align: center;
+}
+
+.content h1{
+  font-size: clamp(40px, 12vw, 160px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.content a{
+  text-decoration: none;
+  display: inline-block;
+  color: #fff;
+  font-size: 24px;
+  border: 2px solid #fff;
+  padding: 14px 70px;
+  border-radius: 50px;
+  margin-top: 20px;
+}
+
+/* --------------------------------------------------
+   NAVIGATION (TOP BUTTONS & LOGO)
+-------------------------------------------------- */
 nav{
   width: 100%;
   position: absolute;
@@ -34,166 +69,193 @@ nav{
   align-items: center;
   justify-content: space-between;
 }
-/*logo*/
+
+/* Logo */
 nav .logo{
   width: 80px;
   position: fixed;
-  right: auto;/*fixed logo stays*/
   top: 20px;
-}
-/*home menu about us  contact us*/
-nav ul li{
-  list-style: none;
-  display: inline-block;
-  margin-left: 40px;
-}
-/*size of home menu ...*/
-nav ul li a{
-  text-decoration: none;
-  color: #fff;
-  font-size: 17px; 
+  z-index: 500;
 }
 
-.content{
-  text-align: center;
-}
-/*size of san jose ca */
-.content h1{
-  font-size: clamp(40px, 12vw, 160px);
-  color: #fff;
-  font-weight: 600;
-}
-/*explore box*/
-.content a{
-  text-decoration: none;
-  display: inline-block;
-  color: #fff;
-  font-size: 24px;
-  border: 2px solid #fff;
-  padding: 14px 70px;
-  border-radius: 50px;
-  margin-top: 20px
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-section::not(#home) {
-    padding: 80px 20px;
-    background: white;
-    color: black;
-}
-/*about us contact us*/
-section h2{
-    font-size: 40px;
-    margin-bottom: 10px;
-    color: black;
-}
-/*info of the about us...*/
-section p{
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: black;
-}
-
-/* ✅ Slide-down Menu (iPhone Style) */
-.control-menu {
-    position: fixed;
-    top: -700px; /* Hidden */
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(5px);
-    padding: 20px;
-    transition: top 0.4s ease;
-    z-index: 999;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-.control-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.control-menu ul li {
-    margin: 12px 0;
-}
-
-.control-menu a {
-    color: black;
-    text-decoration: none;
-    font-size: 22px;
-}
-
-.control-about {
-  position: fixed;
-    top: -700px; /* Hidden */
-    left: 0;
-    width: 100%;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(5px);
-    padding: 20px;
-    transition: top 0.4s ease;
-    z-index: 999;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-
-/* ✅ Toggle button */
-.toggle-btn {
-    position: fixed;
-    right: 20px;
-    top: 80px;
-    background: rgba(255,255,255,0.85);
-    border: none;
-    padding: 10px 23px;
-    border-radius: 10px;
-    font-size: 26px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-}
-
-.menu-image {
-  width: 100%;
-  height: auto;
-  display: block;
-  margin: 10px 0 20px;
-  border-radius: 12px;
-}
-
-.toggle-btn-home {
-  position: fixed;
-  right: 20px;
-  top: 20px; /* hidden */
-  background: rgba(255, 255, 255, 0.85);
-  border: none;
-  border-radius: 10px;
-  backdrop-filter: blur(12px);
-  padding: 10px 23px;
-  transition: top 0.4s ease;
-  z-index: 1000;
-  font-size: 26px;
-  cursor: pointer;
-}
-
+/* Buttons */
+.toggle-btn,
+.toggle-btn-home,
 .toggle-about {
   position: fixed;
   right: 20px;
-  top: 140px;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255,255,255,0.85);
   border: none;
+  padding: 10px 23px;
   border-radius: 10px;
-  backdrop-filter: blur(12px);
-  padding: 10px 16px;
-  transition: top 0.4s ease;
-  z-index: 1000;
   font-size: 26px;
   cursor: pointer;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  color: black;
 }
+
+.toggle-btn { top: 80px; }
+.toggle-btn-home { top: 20px; }
+.toggle-about { top: 140px; padding: 10px 16px; }
+
+/* --------------------------------------------------
+   SLIDE-DOWN PANELS (MENU & ABOUT)
+-------------------------------------------------- */
+.control-menu,
+.control-about{
+  position: fixed;
+  top: -700px; /* Hidden by default */
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(5px);
+  padding: 20px;
+  transition: top 0.4s ease;
+  z-index: 999;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.control-about { color: green; }
+
+/* Menu items */
+.control-menu ul {
+  list-style: none;
+}
+
+.control-menu ul li {
+  margin: 12px 0;
+}
+
+.control-menu a {
+  color: black;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+/* --------------------------------------------------
+   SECTION STYLES (ABOUT / CONTACT)
+-------------------------------------------------- */
+section::not(#home) {
+  padding: 80px 20px;
+  background: white;
+  color: black;
+}
+
+section h2{
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+section p{
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: black;
+}
+
+/* --------------------------------------------------
+   BACKGROUND IMAGE GENERAL
+-------------------------------------------------- */
+body {
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
+
+
+/* --------------------------------------------------
+   FIRE NIGIRI VIDEO + TEXT (SIDE-BY-SIDE FIXED)
+-------------------------------------------------- */
+.media-section {
+  width: 100%;
+  padding: 80px 8%;
+  box-sizing: border-box;
+}
+
+.media-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding-top: 120px;
+}
+
+.fire-nigiri-video {
+  width: 50%;
+  max-width: 450px;
+  border-radius: 12px;
+}
+
+.catering {
+  width: 45%;
+  color: white;
+}
+
+.catering h1 {
+  font-size: clamp(30px, 5vw, 60px);
+  margin-bottom: 10px;
+}
+
+.catering p {
+  font-size: 20px;
+  line-height: 1.4;
+  color: white;
+}
+
+/* MOBILE STACK */
+@media(max-width: 768px){
+  .media-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .catering, 
+  .fire-nigiri-video {
+    width: 100%;
+  }
+}
+
+/* --------------------------------------------------
+   CART PANEL (you can style more later)
+-------------------------------------------------- */
+.cart-panel{
+  position: absolute;
+}
+
+/* --------------------------------------------------
+   Pirate ship  animation 
+-------------------------------------------------- */
+.pirate-boat {
+  position: fixed;
+  top: 20px;            /* vertical position — adjust as needed */
+  left: 100px;       /* start off-screen */
+  width: 80px;         /* size of the boat */
+  z-index: 1;        /* in front of everything */
+  pointer-events: none; /* does not block clicking */
+  animation: sail 20s linear infinite;
+  opacity: 1;
+  filter: drop-shadow(0px 8px 12px rgba(0,0,0,0.4));
+}
+
+/* Boat moves from behind the logo → red line → disappears */
+@keyframes sail {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  70% {
+    transform: translateX(65vw);  /* STOP at red line (adjustable) */
+    opacity: 1;
+  }
+  71% {
+    opacity: 0;                  /* Disappear instantly */
+  }
+  100% {
+    opacity: 0;                  /* Stay invisible until restart */
+  }
+}
+
 
 
 
