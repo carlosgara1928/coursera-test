@@ -7,6 +7,9 @@
 </head>
 
 <body>
+  <img src="pirateShipGif.png" class="pirate-boat">
+
+
   <div class="control-menu" id="controlMenu">
     <h2>Menu</h2>
     <div class="item">
@@ -25,16 +28,31 @@
     <section id="contact">
       <h2>Contact Us</h2>
       <p>San Jose, CA</p>
-      <p>+1(408) 561-5136</p>
+      <p>+1(669) 235-7684</p>
     </section>
   </div>
 
-  <nav>
+  <nav class="top-nav">
     <button id="menuToggle" class="toggle-btn" type="button">MENU</button>
     <button id="homeButton" class="toggle-btn-home" type="button">HOME</button>
     <button id="aboutUsButton" class="toggle-about" type="button">ABOUT</button>
     <img src="piratas_logo1.png" class="logo">   
   </nav>
+
+  <!-- SECTION W/ VIDEO + TEXT SIDE BY SIDE-->
+  <section class="media-section">
+  <div class="media-row">
+    <video autoplay loop muted playsinline preload="auto" class="fire-nigiri-video">
+      <source src="fireNigiri.mp4" type="video/mp4">
+    </video>
+
+    <div class="catering">
+      <h1>Catering</h1>
+      <p>Contact Us for prices and menu options.</p>
+    </div>
+  </div>
+</section>
+
 
   <section id="home" class="hero">
     <video autoplay loop muted playsinline preload="auto" class="back-video">
@@ -53,7 +71,8 @@
     <h3>Total: $<span id="cartTotal">0</span></h3>
     <button id="checkoutButton">Go To Checkout</button>
   </div>
-
+  
+  <!--PANEL TOGGLES-->
   <script>
     const menuPanel = document.getElementById("controlMenu");
     const menuButton = document.getElementById("menuToggle");
@@ -64,12 +83,20 @@
     let menuOpen = false;
     let aboutOpen = false;
 
+    //MAKE SURE OANELS START HIDDEN
+    window.addEventListener("load", () => {
+      menuPanel.style.top  = `-${menuPanel.offsetHeight}px`;
+      aboutPanel.style.top = `-${aboutPanel.offsetHeight}px`;
+    });
+
     // MENU button toggle
     menuButton.addEventListener("click", () => {
       if (menuOpen) {
         menuPanel.style.top = `-${menuPanel.offsetHeight}px`; // hide
       } else {
         menuPanel.style.top = "0px"; // show
+        aboutPanel.style.top = `-${aboutPanel.offsetHeight}px`;
+        aboutOpen = false;
       }
       menuOpen = !menuOpen;
     });
@@ -85,14 +112,17 @@
 
     aboutUsButton.addEventListener("click", () => {
       if (aboutOpen) {
-        aboutPanel.style.top = `-${menuPanel.offsetHeight}px`;//hide
+        aboutPanel.style.top = `-${aboutPanel.offsetHeight}px`;//hide
       } else {
         aboutPanel.style.top = "0px";
+        menuPanel.style.top = `-${menuPanel.offsetHeight}px`;
+        menuOpen = false;
       }
       aboutOpen = !aboutOpen;
     });
   </script>
 
+<!--CART SCRIPT-->
   <script>
     let cart = [];
 
@@ -100,17 +130,18 @@
       cart.push({name, price});
       updateCart();
     }
-  </script>
 
-  <script>
     function updateCart() {
       const list = document.getElementById("cartList");
       const totalDisplay = document.getElementById("cartTotal");
   
       list.innerHTML = "";
       let total = 0;
+
       cart.forEach(item => {
-        list.innerHTML += `<li>${item.name} - $${item.price}</li>`;
+        const li = document.createElement("li");
+        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        list.appendChild(li);
         total += item.price;
       });
 
@@ -118,9 +149,9 @@
     }
 
     document.getElementById("checkoutButton").addEventListener("click", () => {
-    // Guarda el carrito temporalmente
+    // save cart temp
       localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "checkout.html"; // Página nueva
+      window.location.href = "checkout.html"; //new page
     });
 
   </script>
