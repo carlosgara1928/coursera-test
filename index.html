@@ -7,9 +7,11 @@
 </head>
 
 <body>
+
+  <!-- pirate boat animation-->
   <img src="pirateShipGif.png" class="pirate-boat">
-
-
+  
+  <!-- menu control or panel-->
   <div class="control-menu" id="controlMenu">
     <h2>Menu</h2>
     <div class="item">
@@ -20,6 +22,7 @@
     </div>
   </div>
 
+  <!-- about control or panel-->
   <div class="control-about" id="controlAbout">
     <section id="about">
       <h2>About US</h2>
@@ -29,31 +32,24 @@
       <h2>Contact Us</h2>
       <p>San Jose, CA</p>
       <p>+1(669) 235-7684</p>
+      <div class="control-instagram" id="controlInstagram">
+        <a href="http://www.instagram.com/piratessushi2025/"> <img src="insta-background.png" class="insta-icon"></a>
+      </div>
     </section>
   </div>
 
+  <!-- buttons creation-->
   <nav class="top-nav">
     <button id="menuToggle" class="toggle-btn" type="button">MENU</button>
     <button id="homeButton" class="toggle-btn-home" type="button">HOME</button>
     <button id="aboutUsButton" class="toggle-about" type="button">ABOUT</button>
-    <img src="piratas_logo1.png" class="logo">   
+    <img src="piratas_logo1.png" class="logo"> 
+    <button id="cartButton" class="toggle-check" type="button">
+      <img src="cart-icon.svg" class="cart-icon" alt="Cart">
+    </button>  
   </nav>
 
-  <!-- SECTION W/ VIDEO + TEXT SIDE BY SIDE-->
-  <section class="media-section">
-  <div class="media-row">
-    <video autoplay loop muted playsinline preload="auto" class="fire-nigiri-video">
-      <source src="fireNigiri.mp4" type="video/mp4">
-    </video>
-
-    <div class="catering">
-      <h1>Catering</h1>
-      <p>Contact Us for prices and menu options.</p>
-    </div>
-  </div>
-</section>
-
-
+  <!-- Video creation-->
   <section id="home" class="hero">
     <video autoplay loop muted playsinline preload="auto" class="back-video">
       <source src="LogoVideo.mp4" type="video/mp4">
@@ -65,6 +61,18 @@
     </div>
   </section>
 
+  <!-- catering text-->
+  <section class="media-section">
+    <div class="media-row">
+      <img src="catering.png" class="caterin-image">
+      <div class="catering">
+        <h1>Catering</h1>
+        <p>Contact Us for prices and menu options.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- check out or cart control or panel-->
   <div id="cartPanel" class="cart-panel">
     <h2>Your Order</h2>
     <ul id="cartList"></ul>
@@ -79,11 +87,14 @@
     const homeButton = document.getElementById("homeButton");
     const aboutPanel = document.getElementById("controlAbout");
     const aboutUsButton = document.getElementById("aboutUsButton");
+    const cartPanel = document.getElementById("cartPanel");
+    const cartButton = document.getElementById("cartButton");
 
     let menuOpen = false;
     let aboutOpen = false;
+    let cartOpen = false;
 
-    //MAKE SURE OANELS START HIDDEN
+    //MAKE SURE PANELS START HIDDEN
     window.addEventListener("load", () => {
       menuPanel.style.top  = `-${menuPanel.offsetHeight}px`;
       aboutPanel.style.top = `-${aboutPanel.offsetHeight}px`;
@@ -110,6 +121,7 @@
       menuOpen = false;
     });
 
+    // ABOUT button 
     aboutUsButton.addEventListener("click", () => {
       if (aboutOpen) {
         aboutPanel.style.top = `-${aboutPanel.offsetHeight}px`;//hide
@@ -119,6 +131,17 @@
         menuOpen = false;
       }
       aboutOpen = !aboutOpen;
+    });
+
+    //cart button
+    cartButton.addEventListener("click", () => {
+      if (cartOpen) {
+        cartPanel.style.right = "-350px"; // hide(slide out)
+      } else {
+        cartPanel.style.right = "20px";
+        cartOpen = false;
+      }
+      cartOpen = !cartOpen;
     });
   </script>
 
@@ -151,7 +174,8 @@
     document.getElementById("checkoutButton").addEventListener("click", () => {
     // save cart temp
       localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "checkout.html"; //new page
+      //window.location.href = "checkout.html"; //new page
+      window.open("checkout.html", "_blank");
     });
 
   </script>
