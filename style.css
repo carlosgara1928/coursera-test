@@ -192,6 +192,7 @@ section p{
 body {
   background: url("background.jpg") no-repeat center center fixed;
   background-size: cover;
+  overscroll-behavior-y: none; /*changed*/
 }
 
 
