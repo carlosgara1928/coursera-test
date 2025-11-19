@@ -99,19 +99,25 @@ nav .logo{
   color: black;
 }
 
-.cart-icon {
+.cart-icon-img {
+  width: 45px;
+  height: auto;
+}
+
+
+.toggle-check {
   position: fixed;
   right: 20px;
+  bottom: 20px;
   background: rgba(255,255,255,0.85);
   border: none;
-  padding: 5px 5px;
+  padding: 10px;
   border-radius: 10px;
-  font-size: 10px;
   cursor: pointer;
   backdrop-filter: blur(10px);
-  z-index: 1000;
-  color: black;
+  z-index: 100;
 }
+
 
 .toggle-btn-home {
   position: fixed;
@@ -302,7 +308,3 @@ body {
     opacity: 0;                  /* Stay invisible until restart */
   }
 }
-
-
-
-
