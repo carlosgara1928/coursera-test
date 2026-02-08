@@ -15,11 +15,23 @@
   <!-- menu control or panel-->
   <div class="control-menu" id="controlMenu">
     <h2>Menu</h2>
-    <div class="item">
+    <div class="item" id="item">
       <img src="LobsterP.png" class="Image1">
       <h3>Lobster Baked Roll</h3>
       <p>$15.00</p>
       <button onclick="addToCart('Lobster Baked Roll', 15.00)">ADD</button>
+    </div>
+    <div class="item2" id="item2">
+      <img src="Image2.png" class="Image2">
+      <h3>Baked Pineapple Roll</h3>
+      <p>$15.00</p>
+      <button onclick="addToCart('Baked Pineapple Roll', 15.00)">ADD</button>
+    </div>
+    <div class="item3" id="item3">
+      <img src="Image3.png" class="Image3">
+      <h3>Rose Roll</h3>
+      <p>$15.00</p>
+      <button onclick="addToCart('Rose Roll', 15.00)">ADD</button>
     </div>
   </div>
 
@@ -51,6 +63,7 @@
     <!-- CART BUTTON -->
     <button id="cartButton" class="toggle-check" type="button">
      <img src="cart-icon.svg" class="cart-icon-img" alt="Cart">
+     <span id="cartCount" class="cart-count">0</span>
     </button>
 
   </nav>
