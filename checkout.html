@@ -1,19 +1,75 @@
 <!DOCTYPE html>
 <html>
-<h1>Checkout</h1>
-<div id="checkoutItems"></div>
-<h2>Total: $<span id="checkoutTotal"></span></h2>
-<button>Pay Now</button>
+<head>
+  <title>Checkout</title>
+  <script src="https://www.paypal.com/sdk/js?client-id=ATRzX726tpFns6J95sAd7DV1isbmKhm0Mhjjes_j59jEx2mR7m98Hg07xX9rFLeMa8zq5AEcgifpblg2&currency=USD"></script>
+</head>
 
-<script>
-  const cart = JSON.parse(localStorage.getItem("cart"));
-  let total = 0;
+<body>
+  <h1>Checkout</h1>
+  <div id="checkoutItems"></div>
+  <h2>Total: $<span id="checkoutTotal"></span></h2>
 
-  cart.forEach(item => {
-    document.getElementById("checkoutItems").innerHTML += `<p>${item.name} - $${item.price}</p>`;
-    total += item.price;
-  });
+  <!-- PayPal button -->
+  <div id="paypal-button-container"></div>
 
-  document.getElementById("checkoutTotal").innerText = total.toFixed(2);
-</script>
+  <!-- Hidden form to email order -->
+  <form id="orderForm" action="https://formsubmit.co/piratessushi2025@gmail.com" method="POST" style="display:none;">
+    <input type="hidden" name="order_details" id="orderDetails">
+    <input type="hidden" name="total" id="orderTotal">
+    <input type="hidden" name="buyer" id="orderBuyer">
+  </form>
+
+  <script>
+    // Load cart and calculate total
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let total = 0;
+
+    cart.forEach(item => {
+      document.getElementById("checkoutItems").innerHTML += `<p>${item.name} - $${item.price}</p>`;
+      total += item.price;
+    });
+
+    document.getElementById("checkoutTotal").innerText = total.toFixed(2);
+  </script>
+
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: total.toFixed(2) } 
+          }]
+        });
+      },
+
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+
+          // Build a clean text list of cart items
+          let orderText = "";
+          cart.forEach(item => {
+            orderText += `${item.name} - $${item.price}\n`;
+          });
+
+          // Fill hidden form fields
+          document.getElementById("orderDetails").value = orderText;
+          document.getElementById("orderTotal").value = total.toFixed(2);
+          document.getElementById("orderBuyer").value = details.payer.name.given_name + " " + details.payer.name.surname;
+
+          // Submit the email
+          document.getElementById("orderForm").submit();
+          
+          //clear cart
+          localStorage.removeItem("cart");
+
+          // Show success to the user
+          alert("✅ Payment successful! Thank you, " + details.payer.name.given_name + "!");
+        });
+      }
+
+    }).render('#paypal-button-container');
+  </script>
+
+</body>
 </html>
